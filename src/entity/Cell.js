@@ -225,7 +225,7 @@ Cell.prototype.calcMovePhys = function (config) {
       var x1 = this.position.x + (totTravel * sin) + xd;
       var y1 = this.position.y + (totTravel * cos) + yd;
       if (this.gameServer) {
-        this.gameServer.getEjectedNodes().forEach((cell)=> {
+        this.gameServer.getEjectedNodes().forEach((cell)=> { // needs to be simplified
           if (this.nodeId == cell.getId()) return;
           if (!this.simpleCollide(x1, y1, cell, collisionDist)) return;
 
