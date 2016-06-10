@@ -65,6 +65,7 @@ module.exports = class BotPlayer extends PlayerTracker {
       var index = this.visibleNodes.indexOf(this.nodeDestroyQueue[i]);
       if (index > -1) {
         this.visibleNodes.splice(index, 1);
+        this.nodeDestroyQueue.splice(i,1);
       }
     }
 
