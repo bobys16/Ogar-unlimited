@@ -114,7 +114,7 @@ module.exports = class MinionPlayer extends PlayerTracker {
     var ignoreMass = cell.mass / 5;
 
     // Loop
-    for (i in this.visibleNodes) {
+    for (var i in this.visibleNodes) {
       var check = this.visibleNodes[i];
 
       // Cannot target itself
