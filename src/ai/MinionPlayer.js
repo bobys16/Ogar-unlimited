@@ -11,7 +11,7 @@ module.exports = class MinionPlayer extends PlayerTracker {
     this.gameState = 0;
     this.path = [];
     this.owner = owner
-
+    this.isBot = true;
     this.predators = []; // List of cells that can eat this bot
     this.threats = []; // List of cells that can eat this bot but are too far away
     this.prey = []; // List of cells that can be eaten by this bot
@@ -74,6 +74,7 @@ module.exports = class MinionPlayer extends PlayerTracker {
       var index = this.visibleNodes.indexOf(this.nodeDestroyQueue[i]);
       if (index > -1) {
         this.visibleNodes.splice(index, 1);
+        this.nodeDestroyQueue.splice(i,1);
       }
     }
 
