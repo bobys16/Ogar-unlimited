@@ -16,6 +16,7 @@ module.exports = class BotPlayer extends PlayerTracker {
     this.prey = []; // List of cells that can be eaten by this bot
     this.food = [];
     this.rbuffer = 10;
+    this.isBot = true;
     this.foodImportant = []; // Not used - Bots will attempt to eat this regardless of nearby prey/predators
     this.virus = []; // List of viruses
     this.teamingwith = []; // player teamingwith
