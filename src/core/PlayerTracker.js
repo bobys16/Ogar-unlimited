@@ -19,6 +19,8 @@ module.exports = class PlayerTracker {
     this.gameServer = gameServer;
     this.chatAllowed = true;
     this.isAdmin = false;
+    this.checkTick = 40;
+    this.isBot = false;
     this.visible = true;
     this.socket = socket;
     this.blind = false;
@@ -188,10 +190,30 @@ module.exports = class PlayerTracker {
       this.score = 0;
       this.cells.forEach((cell)=>this.score += cell.mass);
     }
+    return Math.floor(this.score);
+  };
 
+  setColor(color) {
+    this.color.r = color.r;
+    this.color.b = color.b;
+    this.color.g = color.g;
+  };
+
+  getTeam() {
+    return this.team;
+  };
+
+  getPremium() {
+    return this.premium;
+  };
+
+// Functions
+
+  update() {
+    if (this.checkTick <= 0) {
 setTimeout(function() {
     if (this.gameServer.config.mousefilter == 1 && this.gameServer.mfre == true) { // Mouse filter code when gameserver detects duplicates
-      if (this.vt > 10) {
+      if (this.vt > 20) {
         this.vt = 0;
         var re = 0;
         for (var i in this.gameServer.clients) {
@@ -230,6 +252,8 @@ setTimeout(function() {
 
         this.vt++;
       }
+    } else {
+      if(this.vt > 0) this.vt--;
     }
 
 }.bind(this),0);
@@ -269,26 +293,11 @@ if (this.gameServer.config.highscore == 1) {
     
     }
 }.bind(this),0);
-    return Math.floor(this.score);
-  };
-
-  setColor(color) {
-    this.color.r = color.r;
-    this.color.b = color.b;
-    this.color.g = color.g;
-  };
-
-  getTeam() {
-    return this.team;
-  };
-
-  getPremium() {
-    return this.premium;
-  };
-
-// Functions
-
-  update() {
+this.checkTick = 40;
+} else {
+  this.checkTick --;
+  
+}
  setTimeout(function() {
     // Actions buffer (So that people cant spam packets)
     if (this.socket.packetHandler.pressSpace) { // Split cell
@@ -436,8 +445,7 @@ if (this.gameServer.config.highscore == 1) {
             Math.min(this.centerPos.y + this.scrambleY + height, this.gameServer.config.borderBottom + this.scrambleY)
       ));
     } */
-
-
+    
     // Handles disconnections
     if (this.disconnect > -1) {
       // Player has disconnected... remove it when the timer hits -1
