@@ -612,7 +612,7 @@ startingFood() {
     let clients = this.getClients();
     for (let i = 0; i < clients.length; i++) {
       let client = clients[i].playerTracker;
-      if (!client || client.isBot) {
+      if (!client) {
         continue;
       }
 
