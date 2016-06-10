@@ -583,7 +583,7 @@ startingFood() {
       // todo memory leak?
       // client.nodeAdditionQueue is only used by human players, not bots
       // for bots it just gets collected forever, using ever-increasing amounts of memory
-      if ('_socket' in client.socket && node.visibleCheck(client.viewBox, client.centerPos)) {
+      if ('_socket' in client.socket && !client.isBot && node.visibleCheck(client.viewBox, client.centerPos)) {
         client.nodeAdditionQueue.push(node);
       }
     }
@@ -612,7 +612,7 @@ startingFood() {
     let clients = this.getClients();
     for (let i = 0; i < clients.length; i++) {
       let client = clients[i].playerTracker;
-      if (!client) {
+      if (!client || client.isBot) {
         continue;
       }
 
