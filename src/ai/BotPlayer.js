@@ -111,7 +111,7 @@ module.exports = class BotPlayer extends PlayerTracker {
     var ignoreMass = cell.mass / 25;
 
     // Loop
-    for (i in this.visibleNodes) {
+    for (var i in this.visibleNodes) {
       var check = this.visibleNodes[i];
 
       // Cannot target itself
