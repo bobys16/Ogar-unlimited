@@ -61,13 +61,7 @@ module.exports = class BotPlayer extends PlayerTracker {
   update() { // Overrides the update function from player tracker
   setTimeout(function() {
     // Remove nodes from visible nodes if possible
-    for (var i = 0; i < this.nodeDestroyQueue.length; i++) {
-      var index = this.visibleNodes.indexOf(this.nodeDestroyQueue[i]);
-      if (index > -1) {
-        this.visibleNodes.splice(index, 1);
-        this.nodeDestroyQueue.splice(i,1);
-      }
-    }
+  
 
     // Respawn if bot is dead
     // todo see if this is leaking memory
